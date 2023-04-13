@@ -5,7 +5,7 @@ Each of the questions/tasks below can be answered using a `SELECT` query. When y
 1) Find all the matches from 2017.
 
 ```sql
-<!-- Copy solution here -->
+SELECT * FROM matches WHERE season =2017;
 
 
 ```
@@ -13,7 +13,7 @@ Each of the questions/tasks below can be answered using a `SELECT` query. When y
 2) Find all the matches featuring Barcelona.
 
 ```sql
-<!-- Copy solution here -->
+SELECT * FROM matches WHERE hometeam ='Barcelona' OR awayteam = 'Barcelona';
 
 
 ```
@@ -21,7 +21,7 @@ Each of the questions/tasks below can be answered using a `SELECT` query. When y
 3) What are the names of the Scottish divisions included?
 
 ```sql
-<!-- Copy solution here -->
+SELECT DISTINCT name FROM divisions WHERE code LIKE 'SC%';
 
 
 ```
@@ -29,7 +29,11 @@ Each of the questions/tasks below can be answered using a `SELECT` query. When y
 4) Find the value of the `code` for the `Bundesliga` division. Use that code to find out how many matches Freiburg have played in that division. HINT: You will need to query both tables
 
 ```sql
-<!-- Copy solution here -->
+SELECT code FROM divisions WHERE name = 'Bundesliga';
+
+--THEN
+
+SELECT COUNT(*) FROM matches WHERE (hometeam = 'Freiburg' OR awayteam = 'Freiburg') AND division_code = 'D1';
 
 
 ```
@@ -37,7 +41,7 @@ Each of the questions/tasks below can be answered using a `SELECT` query. When y
 5) Find the teams which include the word "City" in their name. 
 
 ```sql
-<!-- Copy solution here -->
+SELECT hometeam, awayteam FROM matches WHERE hometeam LIKE '%City%' OR awayteam LIKE '%City%';
 
 
 ```
@@ -45,7 +49,7 @@ Each of the questions/tasks below can be answered using a `SELECT` query. When y
 6) How many different teams have played in matches recorded in a French division?
 
 ```sql
-<!-- Copy solution here -->
+SELECT COUNT(DISTINCT hometeam) + COUNT(DISTINCT awayteam) AS total_teams FROM matches WHERE division_code LIKE 'F%';
 
 
 ```
@@ -53,7 +57,7 @@ Each of the questions/tasks below can be answered using a `SELECT` query. When y
 7) Have Huddersfield played Swansea in any of the recorded matches?
 
 ```sql
-<!-- Copy solution here -->
+SELECT * FROM matches WHERE hometeam = 'Huddersfield' AND awayteam ='Swansea' OR awayteam = 'Huddersfield' AND hometeam = 'Swansea';
 
 
 ```
@@ -61,7 +65,7 @@ Each of the questions/tasks below can be answered using a `SELECT` query. When y
 8) How many draws were there in the `Eredivisie` between 2010 and 2015?
 
 ```sql
-<!-- Copy solution here -->
+SELECT COUNT(*) AS num_draws FROM matches WHERE division_code = 'N1' AND season BETWEEN 2010 AND 2015 AND ftr = 'D';
 
 
 ```
